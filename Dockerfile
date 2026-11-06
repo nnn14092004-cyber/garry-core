@@ -2,12 +2,11 @@
 FROM rust:1.82-slim AS builder
 WORKDIR /usr/src/garry-core
 
-# Copy toàn bộ mã nguồn vào tầng builder
 COPY Cargo.toml ./
 COPY src ./src
 
-# Build release binary với cờ tối ưu hóa toàn bộ
-RUN cargo build --release --bin garry
+# Build toàn bộ release target của crate
+RUN cargo build --release
 
 # Stage 2: Minimal Air-Gapped Runtime Container
 FROM debian:bookworm-slim AS runtime
@@ -17,7 +16,8 @@ RUN useradd -m -u 10001 garryuser && \
     mkdir -p /app/garry_workspace/knowledge /app/.garry && \
     chown -R garryuser:garryuser /app
 
-COPY --from=builder /usr/src/garry-core/target/release/garry /usr/local/bin/garry
+# Copy binary từ target/release (Cargo tự động lấy binary chính của crate)
+COPY --from=builder /usr/src/garry-core/target/release/garry-core /usr/local/bin/garry
 
 USER garryuser
 ENTRYPOINT ["/usr/local/bin/garry"]
