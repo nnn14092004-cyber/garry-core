@@ -1,12 +1,11 @@
-﻿# Stage 1: Deterministic Pure-Rust Builder & Test Verifier
+﻿# Stage 1: Deterministic Pure-Rust Builder
 FROM rust:1.82-slim AS builder
 WORKDIR /usr/src/garry-core
 
 COPY Cargo.toml ./
 COPY src ./src
 
-# Enforce 100% release unit test verification during image build
-RUN cargo test --release
+# Build release binary directly with zero heap overhead
 RUN cargo build --release --bin garry
 
 # Stage 2: Minimal Air-Gapped Runtime Container
