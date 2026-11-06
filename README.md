@@ -2,11 +2,12 @@
 
 **Deterministic Finite State Machine, Stack-Bounded SMT Interval Prover, 256-Axiom Resonance Hypergraph, and EVM Bytecode Ground-Truth Verification Engine.**
 
-[![CI Pipeline](https://github.com/Clear-OSS/garry-core/actions/workflows/ci.yml/badge.svg)](https://github.com/Clear-OSS/garry-core/actions)
-[![Language: Pure Rust](https://img.shields.io/badge/Language-Pure_Rust_2021-orange.svg)]()
-[![External Crates: Zero](https://img.shields.io/badge/External_Crates-0_(100%25_std)-brightgreen.svg)]()
-[![Architecture: Stack-Bounded](https://img.shields.io/badge/Memory-Stack--Bounded_O(1)-blue.svg)]()
-[![License: MIT / Apache-2.0](https://img.shields.io/badge/License-MIT%20OR%20Apache--2.0-informational.svg)]()
+<p align="left">
+  <img src="https://img.shields.io/badge/Language-Pure_Rust_2021-orange.svg" alt="Language">
+  <img src="https://img.shields.io/badge/External_Crates-0_(100%25_std)-brightgreen.svg" alt="Zero Crates">
+  <img src="https://img.shields.io/badge/Memory-Stack--Bounded_O(1)-blue.svg" alt="Memory">
+  <img src="https://img.shields.io/badge/License-MIT%20OR%20Apache--2.0-informational.svg" alt="License">
+</p>
 
 ---
 
