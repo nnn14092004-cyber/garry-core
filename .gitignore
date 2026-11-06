@@ -1,0 +1,7 @@
+﻿/target/
+/.garry/
+/garry_workspace/
+*.garrytrc
+*.checkpoint
+*.sol
+*.txt

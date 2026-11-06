@@ -1,0 +1,18 @@
+[package]
+name = "garry-core"
+version = "0.1.0"
+edition = "2021"
+description = "Deterministic Finite State Machine, Stack-Bounded SMT Interval Prover, and EVM Bytecode Ground-Truth Verification Engine"
+license = "MIT OR Apache-2.0"
+
+[lib]
+name = "garry_core"
+path = "src/lib.rs"
+
+[[bin]]
+name = "garry"
+path = "src/main.rs"
+
+[dependencies]
+
+[workspace]

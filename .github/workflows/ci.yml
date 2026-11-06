@@ -1,0 +1,41 @@
+﻿name: Garry Core Formal Verification & Bare-Metal CI
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  verify-and-benchmark:
+    name: Zero-Crate Audit, Formal Tests & Benchmarks
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install Stable Rust Toolchain
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Verify Zero External Dependencies Policy
+        run: |
+          echo "Auditing Cargo.toml for zero external dependencies..."
+          DEPS=$(awk '/^\[dependencies\]/{flag=1; next} /^\[/{flag=0} flag' Cargo.toml | grep -v '^[[:space:]]*$' | grep -v '^#' || true)
+          if [ -n "$DEPS" ]; then
+            echo "Policy Violation: External crates detected in [dependencies]!"
+            exit 1
+          fi
+          echo "PASS: 0 external crates confirmed."
+
+      - name: Execute 20 Formal Verification Unit Tests (--release)
+        run: cargo test --release -- --nocapture
+
+      - name: Execute Bare-Metal Stack Benchmarks (--release)
+        run: cargo run --release -- bench
+
+      - name: Build Reproducible Docker Container
+        run: docker build -t garry-core:ci .
