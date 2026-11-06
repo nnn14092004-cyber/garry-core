@@ -17,7 +17,7 @@ pub const MAX_AUTO_PATCH_BYTES: usize = 160;
 const HEX_CHARS: [u8; 16] = *b"0123456789ABCDEF";
 
 /// Writes a 32-bit unsigned integer as 8 uppercase hex bytes into `buf` at `offset`.
-const fn write_hex_u32(buf: &mut [u8; MAX_SECONDARY_POC_BYTES], offset: usize, val: u32) -> usize {
+fn write_hex_u32(buf: &mut [u8; MAX_SECONDARY_POC_BYTES], offset: usize, val: u32) -> usize {
     let mut k = 0usize;
     while k < 8 && (offset + k) < MAX_SECONDARY_POC_BYTES {
         let shift = (7 - k) * 4;
