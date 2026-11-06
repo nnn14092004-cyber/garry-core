@@ -5,8 +5,7 @@ WORKDIR /usr/src/garry-core
 COPY Cargo.toml ./
 COPY src ./src
 
-# Build release target
-RUN cargo build --release
+RUN cargo build --release --bin garry
 
 # Stage 2: Minimal Air-Gapped Runtime Container
 FROM debian:bookworm-slim AS runtime
@@ -16,8 +15,7 @@ RUN useradd -m -u 10001 garryuser && \
     mkdir -p /app/garry_workspace/knowledge /app/.garry && \
     chown -R garryuser:garryuser /app
 
-# Copy binary chính xác theo tên crate sinh ra
-COPY --from=builder /usr/src/garry-core/target/release/garry-core /usr/local/bin/garry
+COPY --from=builder /usr/src/garry-core/target/release/garry /usr/local/bin/garry
 
 USER garryuser
 ENTRYPOINT ["/usr/local/bin/garry"]
