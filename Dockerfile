@@ -5,7 +5,7 @@ WORKDIR /usr/src/garry-core
 COPY Cargo.toml ./
 COPY src ./src
 
-# Build toàn bộ release target của crate
+# Build release target
 RUN cargo build --release
 
 # Stage 2: Minimal Air-Gapped Runtime Container
@@ -16,7 +16,7 @@ RUN useradd -m -u 10001 garryuser && \
     mkdir -p /app/garry_workspace/knowledge /app/.garry && \
     chown -R garryuser:garryuser /app
 
-# Copy binary từ target/release (Cargo tự động lấy binary chính của crate)
+# Copy binary chính xác theo tên crate sinh ra
 COPY --from=builder /usr/src/garry-core/target/release/garry-core /usr/local/bin/garry
 
 USER garryuser
