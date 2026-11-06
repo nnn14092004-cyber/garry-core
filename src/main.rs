@@ -1,5 +1,5 @@
 //! Garry Autonomous Formal Verification & Axiom Engine - CLI Entrypoint & Bare-Metal Benchmarks.
-//! [PURE DETERMINISTIC ENGINE - ZERO IF/ELSE - ZERO VEC! - ZERO EXTERNAL CRATES - FAIL-CLOSED]
+//! [PURE DETERMINISTIC ENGINE - ZERO IF/ELSE - BOUNDED MEMORY - ZERO EXTERNAL CRATES - FAIL-CLOSED]
 
 use std::hint::black_box;
 use std::path::Path;

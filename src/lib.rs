@@ -1,6 +1,6 @@
 //! Garry Core: Deterministic Finite State Machine (FSM), Stack-Bounded Storage (16 Slots),
 //! Interval SMT Prover, EVM Bytecode Ground-Truth Anchor, and Adversarial Refutation Engine.
-//! [PURE DETERMINISTIC ENGINE - ZERO IF/ELSE - ZERO VEC! - ZERO HEAP - FAIL-CLOSED]
+//! [PURE DETERMINISTIC ENGINE - ZERO IF/ELSE - STACK-BOUNDED CORE - ZERO EXTERNAL CRATES - FAIL-CLOSED]
 
 pub mod audit;
 pub mod bytecode_anchor;
@@ -185,7 +185,7 @@ impl fmt::Display for EngineError {
                 "Invalid state discriminant in checkpoint: {}",
                 disc
             ),
-           EngineError::CorruptedCheckpoint { reason } => write!(
+            EngineError::CorruptedCheckpoint { reason } => write!(
                 f,
                 "Corrupted checkpoint data: {}",
                 reason

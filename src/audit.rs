@@ -1,5 +1,5 @@
 //! Deterministic Predicate-Driven Invariant Verification Engine & Foundry PoC Synthesizer.
-//! [PURE DETERMINISTIC ENGINE - ZERO IF/ELSE - ZERO VEC! - ZERO EXTERNAL CRATES - FAIL-CLOSED]
+//! [PURE DETERMINISTIC ENGINE - ZERO IF/ELSE - BOUNDED MEMORY - ZERO EXTERNAL CRATES - FAIL-CLOSED]
 
 use std::fmt;
 use std::path::Path;
@@ -1979,9 +1979,9 @@ impl CodeAuditor {
                         "   - Causal Trace: {}",
                         risk_eval.causal_hypergraph_trace
                     ));
-                    report.push(format!("   - Phase 1 Core Proof: {}", adversary_badge));
+                    report.push(format!("   - Core Adversarial Proof: {}", adversary_badge));
                     report.push(format!(
-                        "   - Phase 5 Auto-Patch & SMT Matrix: `{}` | {}",
+                        "   - Auto-Patch & SMT Matrix: `{}` | {}",
                         auto_patch.as_str(),
                         patch_matrix.status.as_badge()
                     ));
@@ -2068,7 +2068,7 @@ impl CodeAuditor {
         (all_findings, report, poc_solidity)
     }
     
-/// Counts how many verified L2 Axiom `.jsonl` files have been swarmed into `knowledge_dir`.
+    /// Counts how many verified L2 Axiom `.jsonl` files have been swarmed into `knowledge_dir`.
     fn count_swarmed_l2_axioms_in_dir(knowledge_dir: & std::path::Path) -> usize {
         let mut count = 0usize;
         match std::fs::read_dir(knowledge_dir) {
@@ -2195,7 +2195,7 @@ impl CodeAuditor {
             false => {}
         }
 
-        // 3. Enclosing Function-Scope Guard & Path-Dominance Post-Condition Proof
+        // 3. Enclosing Function-Scope Guard & Path-Dominance Post-Condition Proof (including positive curve/threshold constants c0, c1)
         let lt_bound_a = format!("{} < c0", clean);
         let lt_bound_b = format!("{} < c1", clean);
         let le_zero = format!("{} <= 0", clean);

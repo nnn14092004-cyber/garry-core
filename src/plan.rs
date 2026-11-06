@@ -1,5 +1,5 @@
 //! Deterministic 16-Node Directed Acyclic Graph (DAG) Execution Planner on the Stack.
-//! [PURE DETERMINISTIC ENGINE - ZERO IF/ELSE - ZERO VEC! - ZERO HEAP - FAIL-CLOSED]
+//! [PURE DETERMINISTIC ENGINE - ZERO IF/ELSE - ZERO HEAP ALLOCATION - ZERO HEAP - FAIL-CLOSED]
 
 use crate::metering::StepMeter;
 use crate::{EngineError, MAX_VALUE_SIZE};

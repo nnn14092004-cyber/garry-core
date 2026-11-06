@@ -1,6 +1,6 @@
 //! Multi-tier deterministic suspicion filter combining structural risk scoring,
 //! bounded interval SMT constraint proving, and adversarial false-positive refutation.
-//! [PURE DETERMINISTIC ENGINE - ZERO IF/ELSE - ZERO VEC! - ZERO FREEZE - FAIL-CLOSED]
+//! [PURE DETERMINISTIC ENGINE - ZERO IF/ELSE - ZERO HEAP ALLOCATION - ZERO FREEZE - FAIL-CLOSED]
 
 use crate::crc::calculate_crc32;
 

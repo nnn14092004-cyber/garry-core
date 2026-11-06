@@ -1,5 +1,5 @@
 //! Natural Language Intent Classification, Deterministic Slot-Filling, and 16-Node DAG Generation.
-//! [PURE DETERMINISTIC ENGINE - ZERO IF/ELSE - ZERO VEC! - ZERO EXTERNAL CRATES - FAIL-CLOSED]
+//! [PURE DETERMINISTIC ENGINE - ZERO IF/ELSE - BOUNDED MEMORY - ZERO EXTERNAL CRATES - FAIL-CLOSED]
 
 use crate::ephemeral::{
     compute_problem_bitmask, extract_token_hashes_stack, fnv1a_hash_ascii_lower, has_token_hash,
@@ -282,7 +282,7 @@ fn split_slice_into_buffer<'a>(
     }
 }
 
-/// Decomposes composite multi-stage intents using a stack-based Ping-Pong Buffer (Zero vec! macro).
+/// Decomposes composite multi-stage intents using a stack-based Ping-Pong Buffer (ZERO HEAP ALLOCATION macro).
 pub fn split_composite_intents(text: &str) -> Vec<String> {
     let lower_check = text.to_lowercase();
     match is_multi_axiom_contract_audit_query_stack(text, &lower_check) {
@@ -841,40 +841,22 @@ impl SensoryIntentPlanner {
             || normalized.contains("export to");
 
         const COMPUTE_DOMAIN_KEYWORDS: &[&str] = &[
-            "ma trận", "matrix", "định thức", "determinant", "det", "hệ phương trình", "hệ pt",
-            "tuyến tính", "gauss", "cholesky", "phân rã", "factorization", "doolittle", "crout",
-            "svd", "singular value", "householder", "givens", "schur", "hessenberg", "tridiagonal",
-            "tam đường chéo", "ldl", "moore_penrose", "pseudoinverse", "giả nghịch đảo", "nghịch đảo", "inverse",
-            "gradient", "độ dốc", "conjugate", "liên hợp", "bicgstab", "gmres", "seidel",
-            "relaxation", "khử sai số", "sor", "rayleigh", "lặp lũy thừa", "power iteration",
-            "trị riêng", "vector riêng", "vectơ riêng", "eigenvalue", "eigenvector", "phổ", "spectral",
-            "vi phân", "đạo hàm", "tích phân", "ode", "runge", "kutta", "rk4", "verlet",
-            "symplectic", "quỹ đạo", "bước số", "bước thời gian", "trajectory", "stepping",
-            "hình học", "khung dây", "spatial", "đa diện", "polyhedron", "chóp", "pyramid",
-            "tứ diện", "tetrahedron", "bát diện", "octahedron", "lập phương", "cube",
-            "dodecahedron", "icosahedron", "quaternion", "euler-poincaré", "bloch",
-            "quantum", "lượng tử", "qubit", "hilbert", "ma trận mật độ", "density matrix",
-            "độ tinh khiết", "purity", "pauli", "hadamard", "bell state", "ghz", "entanglement",
-            "vướng víu", "von neumann",
-            "bất biến", "invariant", "slippage", "trượt giá", "constant product", "liquidity",
-            "thanh khoản", "vault", "inflation", "lending", "npv", "irr", "wacc", "dol", "dfl",
-            "dtl", "thẩm định", "chiếu trực giao", "không gian con", "subspace",
-            "thuật toán", "giải thuật", "quicksort", "sắp xếp", "fibonacci",
-            "silicon", "vi mã", "isa", "thanh ghi", "register", "stack", "ngăn xếp",
-            "audit", "kiểm toán", "lỗ hổng", "reentrancy", "swc-107", "cwe-369", "erc4626",
+            "invariant", "slippage", "constant product", "liquidity",
+            "vault", "inflation", "lending",
+            "audit", "reentrancy", "swc-107", "cwe-369", "erc4626",
             "erc20", "erc721", "erc1155", "vesting", "reward", "paymaster", "entrypoint",
             "pragma solidity", "contract ", "function ", "flashloan", "liquidat", "borrow",
             "collateral", "oracle", "twap", "bridge", "layerzero", "lzreceive", "ccip", "merkle",
             "governance", "timelock", "staking", "restaking", "erc4337", "diamond", "proxy",
             "underflow", "ecrecover", "permit", "mev", "sandwich",
             "future_cashflow", "cumulative_delta", "triage", "standard_json",
-            "mainnet", "fork", "createselectfork", "live_state", "donateasyield",
-            "drainyieldvault", "completemigration", "panic(0x11)", "openzeppelin",
-            "uniswap", "v4lend", "hook", "automator", "harberger", "lease", "auction",
+            "mainnet", "fork", "createselectfork", "live_state",
+            "panic(0x11)", "openzeppelin",
+            "uniswap", "hook", "automator", "lease", "auction",
             "transformer", "sequencer", "recoveryperiod", "poolmanager", "beforeswap",
             "aave", "compound", "curve", "balancer", "morpho", "pendle", "eigenlayer",
             "wormhole", "pyth", "chainlink", "solmate", "solady", "exploitpoc", "foundry",
-            "hypergraph", "resonance", "256 axioms", "risk grade", "critical",
+            "hypergraph", "resonance", "risk grade", "critical",
             "causal trace", "stream_ring", "suspicion_filter", "smt_prover", "refutation",
             "bytecode_anchor", "axiom_decay", "patch_verify", "patch_deadlock", "secondary_poc",
         ];

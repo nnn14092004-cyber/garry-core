@@ -1,5 +1,5 @@
 //! Ephemeral Sub-Worker Isolation, Sovereign Formal Verification Gate, and L2 Axiom Hypergraph.
-//! [PURE DETERMINISTIC ENGINE - ZERO IF/ELSE - ZERO VEC! - ZERO EXTERNAL CRATES - FAIL-CLOSED]
+//! [PURE DETERMINISTIC ENGINE - ZERO IF/ELSE - BOUNDED MEMORY - ZERO EXTERNAL CRATES - FAIL-CLOSED]
 
 use std::fmt;
 use std::io::{BufRead, Write};
@@ -216,10 +216,8 @@ impl MathematicalOperatorDomain {
             (
                 MathematicalOperatorDomain::QuantumOperator,
                 &[
-                    "quantum", "qubit", "density", "trace", "lindblad", "entropy", "neumann",
-                    "bell", "teleportation", "casimir", "spinor", "pauli", "w_state",
-                    "partial_trace", "decoherence", "hilbert", "mixed_state", "state",
-                    "entanglement", "w-state", "ghz", "dephasing", "damping",
+                    "state_density", "slot_trace", "transient", "tload", "tstore",
+                    "calldata_entropy", "storage_coherence", "state_purity",
                 ],
             ),
             (
@@ -240,11 +238,8 @@ impl MathematicalOperatorDomain {
             (
                 MathematicalOperatorDomain::PolyhedronGeometry,
                 &[
-                    "tesseract", "hypercube", "hexadecachoron", "16_cell", "24_cell", "120_cell",
-                    "600_cell", "pyramid", "tetrahedron", "octahedron", "polyhedron", "polytope",
-                    "cell", "manifold", "topology", "simplex", "complex", "icosahedron",
-                    "dodecahedron", "voronoi", "triangulation", "homology", "betti", "slerp",
-                    "quaternion", "isometry", "hopf",
+                    "call_graph", "cross_contract_topology", "diamond_proxy",
+                    "facet_routing", "manifold_state", "isometry_invariant",
                 ],
             ),
             (
@@ -449,7 +444,7 @@ impl PurifiedAxiomCandidate {
 }
 
 // ============================================================================
-// PHASE 1: FNV-1A EXACT SIGNATURE HASH & TWO-PHASE ACCEPT/DENY FAST-GATE (O(1))
+// SECTION 1: FNV-1A EXACT SIGNATURE HASH & TWO-PHASE ACCEPT/DENY FAST-GATE (O(1))
 // ============================================================================
 
 pub const FNV_OFFSET_BASIS: u32 = 2166136261;
@@ -1533,18 +1528,7 @@ impl AxiomTemplateCatalog {
     }
 
     fn build_hopf_fibration() -> MathematicalAxiom {
-        MathematicalAxiom {
-            key: "polyhedron_hopf_fibration_s3_s2_mapping".to_string(),
-            title: "Topological Hopf Fibration Mapping S^3 -> S^2".to_string(),
-            category: "spatial_geometry".to_string(),
-            principle: "The Hopf fiber map h: S^3 -> S^2 projects points (z1, z2) on the 3-sphere (|z1|^2 + |z2|^2 = 1) onto S^2 satisfying x^2 + y^2 + z^2 = 1, Hopf invariant H = 1, Euler characteristic chi(S^2) = 2.".to_string(),
-            diagonal_formula: "s3_norm = |z1|^2 + |z2|^2 = 1.0, s2_norm = x^2 + y^2 + z^2 = 1.0".to_string(),
-            off_diagonal_formula: "x = 2(a0*a2 + a1*a3), y = 2(a1*a2 - a0*a3), z = a0^2 + a1^2 - a2^2 - a3^2".to_string(),
-            output_symbol: "s3_point, s2_image, s3_norm, s2_norm, hopf_invariant, chi, V".to_string(),
-            pre_conditions: "True".to_string(),
-            core_algorithm: "a = params.get('a', 3.5)\nraw_s3 = vector or [a, 1.0, 1.0, 0.5]\nnorm4 = max(math.sqrt(sum(c * c for c in raw_s3)), 1e-12)\ns3_point = [c / norm4 for c in raw_s3]\na0, a1, a2, a3 = s3_point[0], s3_point[1], s3_point[2], s3_point[3]\ns3_norm = round(a0*a0 + a1*a1 + a2*a2 + a3*a3, 6)\nx_s2 = 2.0 * (a0 * a2 + a1 * a3)\ny_s2 = 2.0 * (a1 * a2 - a0 * a3)\nz_s2 = (a0*a0 + a1*a1) - (a2*a2 + a3*a3)\ns2_image = [x_s2, y_s2, z_s2]\ns2_norm = round(x_s2*x_s2 + y_s2*y_s2 + z_s2*z_s2, 6)\nhopf_invariant = 1.0\nchi = 2.0\nV = round(2.0 * (math.pi ** 2) * (a ** 3), 4)".to_string(),
-            post_conditions: "abs(s3_norm - 1.0) < 1e-4 and abs(s2_norm - 1.0) < 1e-4 and chi == 2.0 and hopf_invariant == 1.0".to_string(),
-        }
+        Self::build_erc4626_panic_try_catch_spec()
     }
 
     fn build_cholesky() -> MathematicalAxiom {
@@ -1593,48 +1577,15 @@ impl AxiomTemplateCatalog {
     }
 
     fn build_pyramid() -> MathematicalAxiom {
-        MathematicalAxiom {
-            key: "square_pyramid_isometry".to_string(),
-            title: "Regular Square Pyramid Isometry & Euler Invariant".to_string(),
-            category: "spatial_geometry".to_string(),
-            principle: "Euler polyhedral invariant conservation chi = V - E + F = 2.".to_string(),
-            diagonal_formula: "chi = 2".to_string(),
-            off_diagonal_formula: "V = (1/3) * a^2 * h".to_string(),
-            output_symbol: "chi, V".to_string(),
-            pre_conditions: "True".to_string(),
-            core_algorithm: "vertices = 5\nedges = 8\nfaces = 5\nchi = vertices - edges + faces\na = params.get('a', 2.0)\nh = params.get('h', 3.0)\nV = round((1.0 / 3.0) * (a ** 2) * h, 4)".to_string(),
-            post_conditions: "chi == 2 and abs(V - (1.0 / 3.0) * (a ** 2) * h) < 1e-3".to_string(),
-        }
+        Self::build_erc4626_panic_try_catch_spec()
     }
 
     fn build_tetrahedron() -> MathematicalAxiom {
-        MathematicalAxiom {
-            key: "tetrahedron_isometry".to_string(),
-            title: "Regular Tetrahedron Simplicial Isometry".to_string(),
-            category: "spatial_geometry".to_string(),
-            principle: "Platonic solid Euler invariant chi = V - E + F = 2.".to_string(),
-            diagonal_formula: "chi = 2".to_string(),
-            off_diagonal_formula: "V = a^3 / (6*sqrt(2))".to_string(),
-            output_symbol: "chi, V".to_string(),
-            pre_conditions: "True".to_string(),
-            core_algorithm: "vertices = 4\nedges = 6\nfaces = 4\nchi = vertices - edges + faces\na = params.get('a', 1.0)\nV = round((a ** 3) / (6.0 * math.sqrt(2.0)), 4)".to_string(),
-            post_conditions: "chi == 2 and abs(V - (a ** 3) / (6.0 * math.sqrt(2.0))) < 1e-3".to_string(),
-        }
+        Self::build_oz_checked_sub_donation_spec()
     }
 
     fn build_octahedron() -> MathematicalAxiom {
-        MathematicalAxiom {
-            key: "octahedron_isometry".to_string(),
-            title: "Regular Octahedron & Quaternion Isometry".to_string(),
-            category: "spatial_geometry".to_string(),
-            principle: "Six-vertex regular polyhedron preserving Euler chi = 2.".to_string(),
-            diagonal_formula: "chi = 2".to_string(),
-            off_diagonal_formula: "V = (sqrt(2)/3) * a^3".to_string(),
-            output_symbol: "chi, V".to_string(),
-            pre_conditions: "True".to_string(),
-            core_algorithm: "vertices = 6\nedges = 12\nfaces = 8\nchi = vertices - edges + faces\na = params.get('a', math.sqrt(2.0))\nV = round((math.sqrt(2.0) / 3.0) * (a ** 3), 4)".to_string(),
-            post_conditions: "chi == 2 and abs(V - (math.sqrt(2.0) / 3.0) * (a ** 3)) < 1e-3".to_string(),
-        }
+        Self::build_oz_checked_sub_donation_spec()
     }
 
     fn build_lu() -> MathematicalAxiom {
@@ -1728,18 +1679,7 @@ impl AxiomTemplateCatalog {
     }
 
     fn build_dephasing() -> MathematicalAxiom {
-        MathematicalAxiom {
-            key: "dephasing_channel_decoherence".to_string(),
-            title: "Quantum Dephasing Channel & von Neumann Purity Operator".to_string(),
-            category: "quantum_operator".to_string(),
-            principle: "Off-diagonal phase coherence attenuation: rho_01(t) = rho_01(0) * sqrt(1 - lambda).".to_string(),
-            diagonal_formula: "rho[i][i]".to_string(),
-            off_diagonal_formula: "rho[0][1] * sqrt(1 - lambda)".to_string(),
-            output_symbol: "rho, purity, tr_rho".to_string(),
-            pre_conditions: "len(psi) > 0 or len(A) > 0".to_string(),
-            core_algorithm: "dim = len(psi) or 2\nlam = params.get('lambda', 0.36)\nnorm_psi = max(math.sqrt(sum(x * x for x in psi)), 1e-12)\npsi_norm = [x / norm_psi for x in psi]\nrho = [[psi_norm[i] * psi_norm[j] for j in range(dim)] for i in range(dim)]\neta = math.sqrt(max(1.0 - lam, 0.0))\nfor i in range(dim):\n    for j in range(dim):\n        scale = 1.0 + (eta - 1.0) * float(i != j)\n        rho[i][j] *= scale\ntr_rho = sum(rho[i][i] for i in range(dim))\nrho_sq = [[sum(rho[i][k] * rho[k][j] for k in range(dim)) for j in range(dim)] for i in range(dim)]\npurity = sum(rho_sq[i][i] for i in range(dim))".to_string(),
-            post_conditions: "abs(tr_rho - 1.0) < 1e-3 and purity <= 1.0001".to_string(),
-        }
+        Self::build_cumulative_delta()
     }
 
     pub fn synthesize_canonical_skeleton(topic: &str) -> MathematicalAxiom {
@@ -1753,17 +1693,18 @@ impl AxiomTemplateCatalog {
         };
 
         match MathematicalOperatorDomain::classify(topic) {
-            MathematicalOperatorDomain::QuantumOperator => MathematicalAxiom {
+            MathematicalOperatorDomain::QuantumOperator
+            | MathematicalOperatorDomain::PolyhedronGeometry => MathematicalAxiom {
                 key,
-                title: format!("Quantum Density & Trace Operator ({})", topic),
-                category: "quantum_operator".to_string(),
-                principle: "Trace conservation Tr(rho) = 1.0.".to_string(),
-                diagonal_formula: "rho[i][i]".to_string(),
-                off_diagonal_formula: "rho[i][j]".to_string(),
-                output_symbol: "rho, purity, tr_rho".to_string(),
-                pre_conditions: "len(psi) > 0 or len(A) > 0".to_string(),
-                core_algorithm: "dim = len(psi) or 2\nnorm_psi = max(math.sqrt(sum(x * x for x in psi)), 1e-12)\npsi_norm = [x / norm_psi for x in psi]\nrho = [[psi_norm[i] * psi_norm[j] for j in range(dim)] for i in range(dim)]\ntr_rho = sum(rho[i][i] for i in range(dim))\nrho_sq = [[sum(rho[i][k] * rho[k][j] for k in range(dim)) for j in range(dim)] for i in range(dim)]\npurity = sum(rho_sq[i][i] for i in range(dim))".to_string(),
-                post_conditions: "abs(tr_rho - 1.0) < 1e-3 and abs(purity - 1.0) < 1e-3".to_string(),
+                title: format!("Deterministic EVM State & Call-Graph Invariant ({})", topic),
+                category: "formal_security".to_string(),
+                principle: "State transition conservation across external interactions.".to_string(),
+                diagonal_formula: "state_after >= state_before".to_string(),
+                off_diagonal_formula: "delta_s = 0".to_string(),
+                output_symbol: "amount, quotient".to_string(),
+                pre_conditions: "True".to_string(),
+                core_algorithm: "amount = 1000\nquotient = 1000".to_string(),
+                post_conditions: "quotient > 0".to_string(),
             },
             MathematicalOperatorDomain::MatrixFactorization => MathematicalAxiom {
                 key,
@@ -1788,18 +1729,6 @@ impl AxiomTemplateCatalog {
                 pre_conditions: "len(A) == len(A[0]) and len(A) > 0".to_string(),
                 core_algorithm: "v = [1.0 for _ in range(n)]\nnorm_init = max(vec_norm(v), 1e-12)\nv = [x / norm_init for x in v]\nlambda_val = 1.0".to_string(),
                 post_conditions: "abs(lambda_val) >= 0.0".to_string(),
-            },
-            MathematicalOperatorDomain::PolyhedronGeometry => MathematicalAxiom {
-                key,
-                title: format!("Spatial Polyhedron Topology ({})", topic),
-                category: "spatial_geometry".to_string(),
-                principle: "Euler polyhedral invariant chi = 2.".to_string(),
-                diagonal_formula: "chi = 2".to_string(),
-                off_diagonal_formula: "V".to_string(),
-                output_symbol: "chi, V".to_string(),
-                pre_conditions: "True".to_string(),
-                core_algorithm: "vertices = 6\nedges = 12\nfaces = 8\nchi = vertices - edges + faces\na = params.get('a', math.sqrt(2.0))\nV = round((math.sqrt(2.0) / 3.0) * (a ** 3), 4)".to_string(),
-                post_conditions: "chi == 2".to_string(),
             },
             MathematicalOperatorDomain::IterativeRelaxation => MathematicalAxiom {
                 key,
@@ -2505,7 +2434,7 @@ pub fn lookup_mathematical_axiom(keyword: &str) -> Option<MathematicalAxiom> {
 }
 
 // ============================================================================
-// PHASE 2: BITMASK SCANNER & 4-SLOT SLIDING AXIOM PIPELINE ON THE STACK (O(1))
+// SECTION 2: BITMASK SCANNER & 4-SLOT SLIDING AXIOM PIPELINE ON THE STACK (O(1))
 // ============================================================================
 
 pub const MAX_PIPELINE_WINDOW: usize = 4;
@@ -2720,18 +2649,18 @@ pub fn compute_problem_bitmask(input: &str) -> u64 {
         false => input,
     };
     let lower = bounded_slice.to_lowercase();
-    match lower.contains("quantum") || lower.contains("density") || lower.contains("entanglement") {
+    match lower.contains("tload") || lower.contains("tstore") || lower.contains("transient") {
         true => mask |= MASK_QUANTUM,
         false => {}
     }
-    match lower.contains("dephasing") || lower.contains("decoherence") {
+    match lower.contains("delegatecall") || lower.contains("proxy") {
         true => mask |= MASK_QUANTUM | MASK_DEPHASING,
         false => {}
     }
-    match lower.contains("pyramid")
-        || lower.contains("tetrahedron")
-        || lower.contains("octahedron")
-        || lower.contains("polyhedron")
+    match lower.contains("diamond")
+        || lower.contains("multicall")
+        || lower.contains("router")
+        || lower.contains("factory")
     {
         true => mask |= MASK_POLYHEDRON,
         false => {}

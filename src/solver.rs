@@ -1,5 +1,5 @@
 //! Universal Autonomous Code Synthesis, Deterministic Calculation Engine, and Function-Scope Sliding Auditor.
-//! [PURE DETERMINISTIC ENGINE - ZERO IF/ELSE - ZERO VEC! - ZERO EXTERNAL CRATES - FAIL-CLOSED]
+//! [PURE DETERMINISTIC ENGINE - ZERO IF/ELSE - BOUNDED MEMORY - ZERO EXTERNAL CRATES - FAIL-CLOSED]
 
 use std::fmt::Write as FmtWrite;
 
@@ -746,7 +746,7 @@ if __name__ == "__main__":
 }
 
 // ============================================================================
-// PHASE 3: FUNCTION-SCOPE SLIDING WINDOW AUDITOR (300-800+ LINES) ON STACK O(1)
+// SECTION 3: FUNCTION-SCOPE SLIDING WINDOW AUDITOR (300-800+ LINES) ON STACK O(1)
 // ============================================================================
 
 pub const MAX_CONTRACT_LINES: usize = 8192;

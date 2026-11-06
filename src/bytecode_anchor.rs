@@ -1,7 +1,7 @@
 //! EVM Bytecode Ground-Truth Anchor: Disassembles raw runtime bytecode on the stack,
 //! strips PUSH1..PUSH32 immediate data, extracts function selectors, and anchors
 //! vulnerability claims directly to physical EVM opcodes.
-//! [PURE DETERMINISTIC ENGINE - ZERO IF/ELSE - ZERO VEC! - ZERO FREEZE - FAIL-CLOSED]
+//! [PURE DETERMINISTIC ENGINE - ZERO IF/ELSE - ZERO HEAP ALLOCATION - ZERO FREEZE - FAIL-CLOSED]
 
 use crate::crc::calculate_crc32;
 

@@ -1,6 +1,6 @@
 //! Logic Adversary Sub-routine: Independent adversarial refutation loop that attempts to
 //! disprove candidate vulnerabilities against EVM Bytecode Ground-Truth and SMT invariants.
-//! [PURE DETERMINISTIC ENGINE - ZERO IF/ELSE - ZERO VEC! - ZERO FREEZE - FAIL-CLOSED]
+//! [PURE DETERMINISTIC ENGINE - ZERO IF/ELSE - ZERO HEAP ALLOCATION - ZERO FREEZE - FAIL-CLOSED]
 
 use crate::bytecode_anchor::BytecodeAnchorProfile;
 use crate::crc::calculate_crc32;
@@ -62,7 +62,7 @@ pub struct AdversarialChallengeBundle {
     pub triggers_permanent_dos_revert: bool,
 }
 
-/// Phase 4 v5.2.2: Input context for the internal AI Self-Correction Jury (Zero External API/Crates).
+/// Input context for the internal Counterfactual Self-Correction Jury (Zero External API/Crates).
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct SelfCorrectionInput<'a> {
     pub vuln_kind: ClaimedVulnerabilityKind,
@@ -75,7 +75,7 @@ pub struct SelfCorrectionInput<'a> {
     pub has_pre_call_state_deduction: bool,
 }
 
-/// Phase 4 v5.2.2: Verdict from the internal Self-Correction Jury.
+/// Verdict from the internal Counterfactual Self-Correction Jury.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum SelfCorrectionVerdict {
     /// Finding survived all adversarial self-correction questions.
@@ -299,7 +299,7 @@ impl LogicAdversaryEngine {
         }
     }
 
-    /// Phase 4 v5.2.2: Internal AI Self-Correction Loop (Runs inside `spawn_blocking` with 0 external API/Libs).
+    /// Internal Counterfactual Self-Correction Loop (Runs deterministically on stack with 0 external API/Libs).
     /// Challenges every candidate finding with 4 counterfactual self-check questions before allowing High/Critical status.
     pub fn execute_self_correction_loop_on_stack(
         &self,

@@ -1,7 +1,7 @@
-//! Phase 5: Patch-Verification Matrix (Patch Deadlock) & Top-Tier Researcher Report Formatter.
+//! Patch-Verification Matrix (Patch Deadlock) & Formal Security Report Formatter.
 //! Challenges developer patches against the Deterministic SMT Prover to expose superficial
 //! fixes and emits a Secondary Regression Proof descriptor when any invariant gap remains.
-//! [PURE DETERMINISTIC ENGINE - ZERO IF/ELSE - ZERO VEC! - ZERO FREEZE - FAIL-CLOSED]
+//! [PURE DETERMINISTIC ENGINE - ZERO IF/ELSE - BOUNDED MEMORY - ZERO FREEZE - FAIL-CLOSED]
 
 use crate::crc::calculate_crc32;
 use crate::refutation::ClaimedVulnerabilityKind;
@@ -103,7 +103,7 @@ impl PatchVerificationStatus {
     }
 }
 
-/// Complete Patch-Verification Matrix Evaluation (Phase 5).
+/// Complete Patch-Verification Matrix Evaluation.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct PatchVerificationMatrixReport {
     pub status: PatchVerificationStatus,
@@ -122,7 +122,7 @@ impl PatchVerificationMatrixReport {
     }
 }
 
-/// Phase 5 Engine: Patch-Verification Matrix & Executive Report Seal Generator.
+/// Patch-Verification Matrix & Executive Report Seal Generator.
 #[derive(Debug, Clone, Copy, Default)]
 pub struct PatchVerificationMatrixEngine;
 
@@ -153,7 +153,7 @@ impl PatchVerificationMatrixEngine {
             || slice_contains_ascii_ci(proposed_patch, b"muldiv")
             || slice_contains_ascii_ci(proposed_patch, b"saturating");
         let has_strict_cei_or_global_lock = slice_contains_ascii_ci(proposed_patch, b"cei")
-            || slice_contains_ascii_ci(proposed_patch, b"liquidatingtokenid == 0")
+            || slice_contains_ascii_ci(proposed_patch, b"nonreentrant")
             || slice_contains_ascii_ci(proposed_patch, b"!vault.islocked()");
 
         let mut prover = DeterministicSmtProver::new();
@@ -207,7 +207,6 @@ impl PatchVerificationMatrixEngine {
         }
     }
 
-    /// Phase 5 v5.2.2: Auto-Patch Recommender & SMT Cross-Verifier on the stack.
     /// Synthesizes a minimal, non-breaking patch snippet for each vulnerability class and verifies it via SMT.
     pub fn recommend_and_verify_auto_patch_stack(
         &self,
@@ -258,7 +257,7 @@ impl PatchVerificationMatrixEngine {
     }
 }
 
-/// Phase 5 v5.2.2: Auto-Patch Recommendation bundle verified against the SMT Prover.
+/// Auto-Patch Recommendation bundle verified against the SMT Prover.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct AutoPatchRecommendation {
     pub patch_bytes: [u8; MAX_AUTO_PATCH_BYTES],

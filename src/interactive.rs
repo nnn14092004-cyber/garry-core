@@ -1,5 +1,5 @@
 //! Synchronous Deterministic REPL Engine for Interactive CLI, Swarm Axiom Research, and Formal Code Auditing.
-//! [PURE DETERMINISTIC ENGINE - ZERO IF/ELSE - ZERO VEC! - ZERO EXTERNAL CRATES - FAIL-CLOSED]
+//! [PURE DETERMINISTIC ENGINE - ZERO IF/ELSE - BOUNDED MEMORY - ZERO EXTERNAL CRATES - FAIL-CLOSED]
 
 use std::io::{BufRead, Write};
 use std::path::{Path, PathBuf};
