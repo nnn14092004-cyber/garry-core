@@ -2,10 +2,11 @@
 FROM rust:1.82-slim AS builder
 WORKDIR /usr/src/garry-core
 
+# Copy toàn bộ mã nguồn vào tầng builder
 COPY Cargo.toml ./
 COPY src ./src
 
-# Build release binary directly with zero heap overhead
+# Build release binary với cờ tối ưu hóa toàn bộ
 RUN cargo build --release --bin garry
 
 # Stage 2: Minimal Air-Gapped Runtime Container
