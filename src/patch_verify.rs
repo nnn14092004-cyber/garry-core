@@ -29,7 +29,7 @@ fn write_hex_u32(buf: &mut [u8; MAX_SECONDARY_POC_BYTES], offset: usize, val: u3
 }
 
 /// Copies bytes into a fixed stack buffer in bounded O(1) steps.
-const fn copy_slice_stack(
+fn copy_slice_stack(
     buf: &mut [u8; MAX_SECONDARY_POC_BYTES],
     offset: usize,
     src: &[u8],
