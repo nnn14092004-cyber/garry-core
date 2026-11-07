@@ -2,22 +2,20 @@
 
 **Deterministic Finite State Machine, Stack-Bounded SMT Interval Prover, 256-Axiom Resonance Hypergraph, and EVM Bytecode Ground-Truth Verification Engine.**
 
-<p align="left">
-  <img src="[https://img.shields.io/badge/Language-Pure_Rust_2021-orange.svg](https://img.shields.io/badge/Language-Pure_Rust_2021-orange.svg)" alt="Language">
-  <img src="[https://img.shields.io/badge/External_Crates-0_(100%25_std)-brightgreen.svg](https://img.shields.io/badge/External_Crates-0_(100%25_std)-brightgreen.svg)" alt="Zero Crates">
-  <img src="[https://img.shields.io/badge/Memory-Stack--Bounded_O(1)-blue.svg](https://img.shields.io/badge/Memory-Stack--Bounded_O(1)-blue.svg)" alt="Memory">
-  <img src="[https://img.shields.io/badge/Platform-Linux_%7C_macOS_%7C_Windows-informational.svg](https://img.shields.io/badge/Platform-Linux_%7C_macOS_%7C_Windows-informational.svg)" alt="Platform">
-  <img src="[https://img.shields.io/badge/License-MIT%20OR%20Apache--2.0-blue.svg](https://img.shields.io/badge/License-MIT%20OR%20Apache--2.0-blue.svg)" alt="License">
-</p>
+![Language](https://img.shields.io/badge/Language-Pure_Rust_2021-orange)
+![Zero Crates](https://img.shields.io/badge/External_Crates-0_100%25_std-brightgreen)
+![Memory](https://img.shields.io/badge/Memory-Stack_Bounded_O1-blue)
+![Platform](https://img.shields.io/badge/Platform-Linux_macOS_Windows-informational)
+![License](https://img.shields.io/badge/License-MIT_OR_Apache_2.0-blue)
 
 ---
 
 ## 1. Problem & Solution
 
 ### The Problem: Dependency Bloat & Probabilistic False Positives
-Conventional smart contract analyzers, symbolic execution frameworks, and LLM-based auditing tools suffer from two structural flaws:
+Conventional smart contract analyzers, symbolic execution frameworks, and LLM-based auditing tools suffer from two structural bottlenecks:
 1. **Heavyweight Dependency Trees & Unbounded Heap Growth:** Standard security tools pull in hundreds of third-party crates and rely on dynamic heap allocations, causing state-space explosion, unpredictable latency, and supply-chain vulnerability exposure.
-2. **Probabilistic Hallucinations & False-Positive Noise:** Large language models optimize for linguistic plausibility rather than mathematical soundness, masking broken logical invariants beneath fluent prose and flooding engineers with unverified warnings.
+2. **Probabilistic Hallucinations & False-Positive Noise:** Large language models optimize for linguistic plausibility rather than formal mathematical soundness, masking broken logical invariants beneath fluent prose and flooding engineers with unverified warnings.
 
 ### The Solution: Deterministic Fail-Closed Verification
 **Garry Core** is architected on the **Scientific Calculator Principle**—replacing probabilistic guesswork with a strictly deterministic, zero-noise verification engine:
@@ -28,7 +26,7 @@ Conventional smart contract analyzers, symbolic execution frameworks, and LLM-ba
 
 ## 2. Core Specifications
 
-- **Pure Rust (`100% std / core`):** Written entirely in Pure Rust (2021 Edition) for bare-metal safety, deterministic instruction execution, and reproducible cross-platform builds across Linux, Apple macOS (Intel & Apple Silicon M1/M2/M3/M4), and Windows.
+- **Pure Rust (`100% std / core`):** Written entirely in Pure Rust (2021 Edition) for bare-metal memory safety, deterministic instruction execution, and reproducible cross-platform builds across Linux, Apple macOS (Intel & Apple Silicon M1/M2/M3/M4), and Windows.
 - **Zero External Dependencies (`0-crate`):** Contains **0 third-party crates** in `Cargo.toml`, completely eliminating external supply-chain attack vectors and non-deterministic runtime overhead.
 - **Stack-Bounded $O(1)$ Memory (`No Heap`):** Operates strictly within fixed-capacity stack structures—featuring 16-node execution DAGs, 16-slot FSM working memory (`BoundedStorage`), 256-node Axiom Resonance Hypergraph rings, and 7,865-byte cryptographic CRC-32 state checkpoints.
 
@@ -50,14 +48,14 @@ Requires only the standard Rust toolchain (`rustc` & `cargo`, 2021 Edition). No 
 
 - **Linux & Apple macOS (Terminal / zsh / bash):**
   ```bash
-  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-  git clone https://github.com/birddigital/garry-core-oss.git
+  curl --proto '=https' --tlsv1.2 -sSf [https://sh.rustup.rs](https://sh.rustup.rs) | sh
+  git clone [https://github.com/birddigital/garry-core-oss.git](https://github.com/birddigital/garry-core-oss.git)
   cd garry-core-oss
   ```
 - **Windows (PowerShell / Command Prompt):**
   Install Rust via [rustup.rs](https://rustup.rs), then clone and enter the repository:
   ```powershell
-  git clone https://github.com/birddigital/garry-core-oss.git
+  git clone [https://github.com/birddigital/garry-core-oss.git](https://github.com/birddigital/garry-core-oss.git)
   cd garry-core-oss
   ```
 
@@ -133,7 +131,7 @@ docker run -it --rm garry-core:latest interactive
 
 ---
 
-## 5. Verification Case Study 1: `SyntheticAmmOracle.sol` (46 LoC, 6 Functions)
+## 5. Open-Source Benchmark Verification: `SyntheticAmmOracle.sol` (46 LoC, 6 Functions)
 
 Executing `:audit garry_workspace/benchmarks/SyntheticAmmOracle.sol` inside the REPL performs a 4-Tier Formal Security Verification and synthesizes a complete Foundry exploit test suite:
 
@@ -260,12 +258,21 @@ contract SyntheticAmmOracleExploitPoCTest is Test {
 
 ---
 
-## 6. Verification Case Study 2: Production-Scale `V4Oracle.sol` (1,056 LoC, 47 Functions) & `VaultDemo.sol`
+## 6. Production Track Record & Competitive Audit Field Evaluations (NDA-Anonymized)
 
+Garry Core has been battle-tested in live security competitions on **Cantina** and enterprise bug bounty engagements across **Cantina** and **Immunefi**. All client names, proprietary protocol identifiers, and internal contract symbols have been anonymized below in strict compliance with Non-Disclosure Agreements (NDAs).
+
+### Selected Medium & High Severity Production Findings
+- **[HIGH / MEDIUM] Arithmetic Underflow in Automated Leverage Execution (`CWE-191`):** Detected an unchecked arithmetic underflow during zero-liquidity fee collection inside a leveraged position execution pipeline, preventing deterministic transaction reverts and fee-accounting DoS.
+- **[HIGH] Token-Scoped Liquidation Guard Bypass & Reserve Inflation (`SWC-107` / `DEFI-INV-02`):** Proven that a token-specific liquidation lock in a multi-asset liquidity vault permitted nested liquidation reentrancy, enabling attackers to artificially inflate internal reserve accounting.
+- **[MEDIUM / HIGH] Horizon Release Throttling via Pre-Exit Price Manipulation (`DEFI-INV-03`):** Identified a state-transition ordering flaw allowing a lessee actor to throttle pending horizon release rates via price-update routines immediately prior to lease exit.
+- **[MEDIUM / HIGH] Reversible Yield-Vault Bridge Underflow & Fallback Corruption (`CWE-191` / `EVM-ABI`):** Pinpointed an arithmetic underflow during cross-vault reversible deposit execution that corrupted the `try/catch` error-handling boundary and broke downstream `abi.decode` fallback recovery.
+
+### Production-Scale Protocol & Baseline Evaluations
 - **Baseline Verification (`:audit VaultDemo.sol` — 14 LoC):** Pinpoints **3 vulnerabilities** (1 High CWE-369 Unchecked Zero-Denominator Division at Line 7; 2 Critical SWC-107 CEI Reentrancy Violations at Lines 10 & 11) with full CRC-32 bytecode seals.
-- **Production-Scale DeFi Evaluation (`:audit V4Oracle.sol` — 1,056 LoC, 47 Functions):**
+- **Enterprise Dual-Source TWAP & Lending Oracle Evaluation (1,056 LoC, 47 Functions — Anonymized):**
   1. **Pre-Swarm Baseline (Strict Fail-Closed & Zero False Positives):** Without 512-bit `FullMath.mulDiv` & `Q96` fixed-point L2 axioms loaded in `garry_workspace/knowledge/`, the SMT Interval Prover scans all 47 functions and emits **`Confirmed Findings: 0`**.
-  2. **Post-Swarm L2 Axiom Verification (`:swarm` -> `:audit V4Oracle.sol`):** Pinpoints **3 distinct mathematical root causes** across 1,056 lines (`Pre-MulDiv 256-Bit Numerator Overflow` at Line 768, `Unchecked Zero-Denominator Division` at Line 931, and `Q96 Root-Before-Scale LSB Truncation` at Line 967) with zero duplicate path noise.
+  2. **Post-Swarm L2 Axiom Verification (`:swarm` -> `:audit`):** Pinpoints **3 distinct mathematical root causes** across 1,056 lines (`Pre-MulDiv 256-Bit Numerator Overflow`, `Unchecked Zero-Denominator Division`, and `Q96 Root-Before-Scale LSB Truncation`) with zero duplicate path noise.
 
 ---
 
