@@ -49,13 +49,13 @@ Requires only the standard Rust toolchain (`rustc` & `cargo`, 2021 Edition). No 
 - **Linux & Apple macOS (Terminal / zsh / bash):**
   ```bash
   curl --proto '=https' --tlsv1.2 -sSf [https://sh.rustup.rs](https://sh.rustup.rs) | sh
-  git clone [https://github.com/birddigital/garry-core-oss.git](https://github.com/birddigital/garry-core-oss.git)
+  git clone [https://github.com/nnn14092004-cyber/garry-math-core.git](https://github.com/nnn14092004-cyber/garry-math-core.git)
   cd garry-core-oss
   ```
 - **Windows (PowerShell / Command Prompt):**
   Install Rust via https://rustup.rs, then clone and enter the repository:
   ```powershell
-  git clone [https://github.com/birddigital/garry-core-oss.git](https://github.com/birddigital/garry-core-oss.git)
+  git clone [https://github.com/nnn14092004-cyber/garry-math-core.git](https://github.com/nnn14092004-cyber/garry-math-core.git)
   cd garry-core-oss
   ```
 
